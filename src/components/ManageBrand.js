@@ -6,7 +6,7 @@ class ManageBrand extends Component {
     state= { brandList: [], AddBrandImage: 'Pilih Gambar', EditBrandImage: 'Pilih Gambar', selectedEditBrandId: 0 }
     componentDidMount() {
         // axios.get('http://localhost:1997/getlistbrand')
-        axios.get('https://justifyester-heroku-hosting.herokuapp.com/getlistbrand')
+        axios.get('https://justifyester-heroku-hosting.herokuapp.com/brand/getlistbrand')
 
         .then((res) => {
             console.log(res);
@@ -31,7 +31,7 @@ class ManageBrand extends Component {
             }
             formData.append('data', JSON.stringify(data)) //mengubah objek javascript jadi json
 
-            axios.post("https://justifyester-heroku-hosting.herokuapp.com/addbrand", formData, headers)
+            axios.post("https://justifyester-heroku-hosting.herokuapp.com/brand/addbrand", formData, headers)
             .then((res) => {
                 alert("Add Brand Success")
                 this.setState({ brandList: res.data })
@@ -47,7 +47,7 @@ class ManageBrand extends Component {
 
     onBtnDeleteClick = (id) => {
         if(window.confirm('Are you sure to delete?')) {
-            axios.delete('https://justifyester-heroku-hosting.herokuapp.com/deletebrand/' + id)
+            axios.delete('https://justifyester-heroku-hosting.herokuapp.com/brand/deletebrand/' + id)
             .then((res) => {
                 alert('Delete Success');
                 this.setState({ brandList: res.data })
@@ -75,7 +75,7 @@ class ManageBrand extends Component {
         }
         formData.append('data', JSON.stringify(data))
 
-        axios.put("https://justifyester-heroku-hosting.herokuapp.com/editbrand/" + id, formData, headers)
+        axios.put("https://justifyester-heroku-hosting.herokuapp.com/brand/editbrand/" + id, formData, headers)
         .then((res) => {
             alert("Edit Brand Success")
             this.setState({ brandList: res.data, selectedEditBrandId: 0 })
